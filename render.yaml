@@ -1,0 +1,15 @@
+# Render Blueprint Configuration
+# This file helps configure your Render deployment
+
+services:
+  - type: web
+    name: natours
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+

@@ -1,0 +1,48 @@
+extends base
+
+block content
+  main.main
+    .auth-container
+      .auth-form__wrapper
+        .auth-form__header
+          h2.heading-secondary Create your account
+          p.auth-form__subtitle Join us today and start exploring amazing tours!
+        
+        form.form.form--signup.auth-form
+          .form__group
+            label.form__label(for='name') 
+              svg.form__icon
+                use(xlink:href='/img/icons.svg#icon-user')
+              span Your name
+            input#name.form__input(type='text', placeholder='Eliana Stout', required)
+          
+          .form__group
+            label.form__label(for='email') 
+              svg.form__icon
+                use(xlink:href='/img/icons.svg#icon-mail')
+              span Email address
+            input#email.form__input(type='email', placeholder='you@example.com', required)
+          
+          .form__group
+            label.form__label(for='password') 
+              svg.form__icon
+                use(xlink:href='/img/icons.svg#icon-lock')
+              span Password
+            input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+          
+          .form__group.ma-bt-md
+            label.form__label(for='password-confirm') 
+              svg.form__icon
+                use(xlink:href='/img/icons.svg#icon-lock')
+              span Confirm password
+            input#password-confirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
+          
+          .form__group
+            button.btn.btn--green.btn--large(type='submit')
+              span Sign Up
+              svg.btn__icon
+                use(xlink:href='/img/icons.svg#icon-arrow-right')
+        
+        .auth-form__footer
+          p Already have an account? 
+            a.auth-form__link(href='/login') Log in here

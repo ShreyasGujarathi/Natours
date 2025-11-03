@@ -1,0 +1,82 @@
+extends base
+
+block content
+  main.main
+    .admin-container
+      .admin-header
+        h1.heading-primary
+          span Manage Guides
+        a.btn.btn--green(href='/admin/dashboard') ← Back to Dashboard
+      
+      .guides-management
+        .guides-section
+          h2.heading-secondary Current Guides
+          
+          if guides && guides.length > 0
+            .guides-grid
+              each guide in guides
+                .guide-card
+                  img.guide-card__photo(src=`/img/users/${guide.photo}`, alt=guide.name)
+                  .guide-card__info
+                    h3.guide-card__name= guide.name
+                    p.guide-card__email= guide.email
+                    span.guide-card__role(class=`guide-card__role--${guide.role}`)= guide.role === 'lead-guide' ? 'Lead Guide' : 'Guide'
+                  .guide-card__actions
+                    select.guide-role-select(data-user-id=guide._id)
+                      option(value='user', selected=guide.role === 'user') User
+                      option(value='guide', selected=guide.role === 'guide') Guide
+                      option(value='lead-guide', selected=guide.role === 'lead-guide') Lead Guide
+                      option(value='admin', selected=guide.role === 'admin') Admin
+                    button.btn.btn--small.btn--danger.remove-guide-btn(data-user-id=guide._id) Remove Guide
+          else
+            p.no-guides No guides assigned yet.
+        
+        .users-section
+          h2.heading-secondary Assign Guides from Existing Users
+          
+          if allUsers && allUsers.length > 0
+            .users-grid
+              each user in allUsers
+                .user-card
+                  img.user-card__photo(src=`/img/users/${user.photo}`, alt=user.name)
+                  .user-card__info
+                    h3.user-card__name= user.name
+                    p.user-card__email= user.email
+                    span.user-card__role User
+                  .user-card__actions
+                    select.user-role-select(data-user-id=user._id)
+                      option(value='user', selected=true) User
+                      option(value='guide') Guide
+                      option(value='lead-guide') Lead Guide
+                      option(value='admin') Admin
+                    button.btn.btn--small.btn--green.make-guide-btn(data-user-id=user._id, data-role='guide') Make Guide
+        
+        .create-guide-section
+          h2.heading-secondary Create New Guide Account
+          form.form.form-create-guide#create-guide-form
+            .form__group
+              label.form__label(for='guide-name') Name *
+              input#guide-name.form__input(type='text', name='name', required)
+            
+            .form__group
+              label.form__label(for='guide-email') Email *
+              input#guide-email.form__input(type='email', name='email', required)
+            
+            .form__group
+              label.form__label(for='guide-password') Password *
+              input#guide-password.form__input(type='password', name='password', required, minlength='8')
+            
+            .form__group
+              label.form__label(for='guide-passwordConfirm') Confirm Password *
+              input#guide-passwordConfirm.form__input(type='password', name='passwordConfirm', required, minlength='8')
+            
+            .form__group
+              label.form__label(for='guide-role') Role *
+              select#guide-role.form__input(name='role', required)
+                option(value='guide') Guide
+                option(value='lead-guide') Lead Guide
+                option(value='admin') Admin
+            
+            .form__group.right
+              button.btn.btn--green(type='submit') Create Guide Account
+

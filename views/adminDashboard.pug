@@ -1,0 +1,49 @@
+extends base
+
+block content
+  main.main
+    .admin-container
+      .admin-header
+        h1.heading-primary
+          span Admin Dashboard
+      
+      .admin-stats
+        .stat-card
+          .stat-card__icon
+            svg
+              use(xlink:href='/img/icons.svg#icon-map-pin')
+          .stat-card__content
+            h2.stat-card__number= toursCount
+            p.stat-card__label Tours
+          a.stat-card__link(href='/admin/tours') Manage →
+        
+        .stat-card
+          .stat-card__icon
+            svg
+              use(xlink:href='/img/icons.svg#icon-user')
+          .stat-card__content
+            h2.stat-card__number= usersCount
+            p.stat-card__label Users
+        
+        .stat-card
+          .stat-card__icon
+            svg
+              use(xlink:href='/img/icons.svg#icon-star')
+          .stat-card__content
+            h2.stat-card__number= bookingsCount
+            p.stat-card__label Bookings
+        
+        .stat-card
+          .stat-card__icon
+            svg
+              use(xlink:href='/img/icons.svg#icon-user')
+          .stat-card__content
+            h2.stat-card__number= guidesCount
+            p.stat-card__label Guides
+          a.stat-card__link(href='/admin/guides') Manage →
+
+      .admin-actions
+        a.btn.btn--green(href='/admin/tours') Manage Tours
+        a.btn.btn--green(href='/admin/tours/new') Create New Tour
+        a.btn.btn--green(href='/admin/guides') Manage Guides
+

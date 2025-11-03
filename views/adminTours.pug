@@ -1,0 +1,51 @@
+extends base
+
+block content
+  main.main
+    .admin-container
+      .admin-header
+        h1.heading-primary
+          span Manage Tours
+        a.btn.btn--green(href='/admin/tours/new') Create New Tour
+      
+      .tours-table-container
+        table.tours-table
+          thead
+            tr
+              th Tour Name
+              th Duration
+              th Difficulty
+              th Price
+              th Guides
+              th Rating
+              th Actions
+          tbody
+            each tour in tours
+              tr
+                td
+                  a.tour-link(href=`/tour/${tour.slug}`)= tour.name
+                td= `${tour.duration} days`
+                td= tour.difficulty
+                td= `$${tour.price}`
+                td
+                  if tour.guides && tour.guides.length > 0
+                    .guides-list
+                      each guide in tour.guides
+                        span.guide-tag(class=`guide-tag--${guide.role}`)= guide.name
+                  else
+                    span.no-guides No guides assigned
+                td
+                  .rating
+                    svg.rating__icon
+                      use(xlink:href='/img/icons.svg#icon-star')
+                    span= tour.ratingsAverage || 'N/A'
+                td
+                  .table-actions
+                    a.btn.btn-small(href=`/admin/tours/${tour._id}/edit`) Edit
+                    button.btn.btn-small.btn--danger.delete-tour-btn(data-tour-id=tour._id) Delete
+            else
+              tr
+                td(colspan='7' style='text-align: center; padding: 3rem;')
+                  p(style='color: var(--text-secondary);') No tours found. 
+                    a(href='/admin/tours/new' style='color: var(--primary-color);') Create your first tour!
+

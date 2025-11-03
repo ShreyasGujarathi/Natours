@@ -1,0 +1,117 @@
+extends base
+
+block append head
+  script(src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js')
+  link(href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet')
+
+block content
+  main.main
+    .admin-container
+      .admin-header
+        h1.heading-primary
+          span= tour ? `Edit Tour: ${tour.name}` : 'Create New Tour'
+        a.btn.btn--small(href='/admin/tours') ← Back to Tours
+      
+      form.form.form-tour-data#tour-form
+        .form__group
+          label.form__label(for='name') Tour Name *
+          input#name.form__input(type='text', value=tour ? tour.name : '', required, name='name', placeholder='e.g., The Forest Hiker')
+        
+        .form__group
+          label.form__label(for='summary') Summary *
+          textarea#summary.form__textarea(required, name='summary', rows='3', placeholder='Brief description of the tour')= tour ? tour.summary : ''
+        
+        .form__group
+          label.form__label(for='description') Description
+          textarea#description.form__textarea(name='description', rows='5', placeholder='Detailed description of the tour')= tour ? tour.description : ''
+        
+        .form__row
+          .form__group
+            label.form__label(for='duration') Duration (days) *
+            input#duration.form__input(type='number', value=tour ? tour.duration : '', required, name='duration', min='1')
+          
+          .form__group
+            label.form__label(for='maxGroupSize') Max Group Size *
+            input#maxGroupSize.form__input(type='number', value=tour ? tour.maxGroupSize : '', required, name='maxGroupSize', min='1')
+          
+          .form__group
+            label.form__label(for='difficulty') Difficulty *
+            select#difficulty.form__input(required, name='difficulty')
+              option(value='easy', selected=tour && tour.difficulty === 'easy') Easy
+              option(value='medium', selected=tour && tour.difficulty === 'medium') Medium
+              option(value='difficult', selected=tour && tour.difficulty === 'difficult') Difficult
+        
+        .form__row
+          .form__group
+            label.form__label(for='price') Price ($) *
+            input#price.form__input(type='number', value=tour ? tour.price : '', required, name='price', min='0', step='0.01')
+          
+          .form__group
+            label.form__label(for='priceDiscount') Discount Price ($)
+            input#priceDiscount.form__input(type='number', value=tour ? tour.priceDiscount : '', name='priceDiscount', min='0', step='0.01')
+        
+        .form__group
+          label.form__label(for='videoUrl') Video URL
+          input#videoUrl.form__input(type='url', value=tour ? tour.videoUrl : '', name='videoUrl', placeholder='https://example.com/video.mp4')
+        
+        .form__group
+          label.form__label(for='startLocation') Start Location *
+          .location-input
+            input#startLocationDesc.form__input(type='text', value=tour && tour.startLocation ? tour.startLocation.description : '', required, name='startLocationDesc', placeholder='e.g., Las Vegas, USA')
+            input#startLocationLat.form__input(type='number', value=tour && tour.startLocation ? tour.startLocation.coordinates[1] : '', required, name='startLocationLat', placeholder='Latitude', step='any')
+            input#startLocationLng.form__input(type='number', value=tour && tour.startLocation ? tour.startLocation.coordinates[0] : '', required, name='startLocationLng', placeholder='Longitude', step='any')
+        
+        .form__group
+          label.form__label Guides
+          .guides-selector
+            each guide in guides
+              label.guide-checkbox
+                input(type='checkbox', name='guides', value=guide._id, checked=tour && tour.guides && tour.guides.some(g => g._id.toString() === guide._id.toString()))
+                img.guide-checkbox__img(src=`/img/users/${guide.photo}`, alt=guide.name)
+                span.guide-checkbox__name= guide.name
+                span.guide-checkbox__role(class=`guide-checkbox__role--${guide.role}`)= guide.role
+        
+        .form__group
+          label.form__label Start Dates (comma-separated, e.g., 2024-06-01, 2024-07-15)
+          input#startDates.form__input(type='text', value=tour && tour.startDates ? tour.startDates.map(d => new Date(d).toISOString().split('T')[0]).join(', ') : '', name='startDates', placeholder='2024-06-01, 2024-07-15')
+        
+        .form__group
+          label.form__label Tour Locations
+          #locations-container
+            if tour && tour.locations && tour.locations.length > 0
+              each location, index in tour.locations
+                .location-entry
+                  input.form__input(type='text', name=`locationDay${index}`, value=location.day, placeholder='Day', required)
+                  input.form__input(type='text', name=`locationDesc${index}`, value=location.description, placeholder='Description', required)
+                  input.form__input(type='number', name=`locationLat${index}`, value=location.coordinates[1], placeholder='Latitude', step='any', required)
+                  input.form__input(type='number', name=`locationLng${index}`, value=location.coordinates[0], placeholder='Longitude', step='any', required)
+                  button.btn.btn--small.btn--danger.remove-location(type='button') Remove
+            else
+              .location-entry
+                input.form__input(type='text', name='locationDay0', placeholder='Day', required)
+                input.form__input(type='text', name='locationDesc0', placeholder='Description', required)
+                input.form__input(type='number', name='locationLat0', placeholder='Latitude', step='any', required)
+                input.form__input(type='number', name='locationLng0', placeholder='Longitude', step='any', required)
+          button.btn.btn--small.btn--green.add-location(type='button') + Add Location
+        
+        .form__group
+          label.form__label Images
+          .image-inputs
+            label.form__label Image Cover
+            input.form__input(type='file', name='imageCover', accept='image/*')
+            if tour && tour.imageCover
+              p.form__help Current: #{tour.imageCover}
+            
+            label.form__label Tour Images (up to 3)
+            input.form__input(type='file', name='images', accept='image/*', multiple)
+            if tour && tour.images && tour.images.length > 0
+              p.form__help Current images:
+                each img in tour.images
+                  span.form__help= ` ${img},`
+        
+        if tour
+          input(type='hidden', name='tourId', value=tour._id)
+        
+        .form__group.right
+          button.btn.btn--green#save-tour-btn(type='submit')= tour ? 'Update Tour' : 'Create Tour'
+

@@ -1,0 +1,34 @@
+extends base
+
+block content
+  main.main
+    .auth-container
+      .auth-form__wrapper
+        .auth-form__header
+          h2.heading-secondary Log into your account
+          p.auth-form__subtitle Welcome back! Please enter your details.
+        
+        form.form.form--login.auth-form
+          .form__group
+            label.form__label(for='email') 
+              svg.form__icon
+                use(xlink:href='/img/icons.svg#icon-mail')
+              span Email address
+            input#email.form__input(type='email', placeholder='you@example.com', required)
+          
+          .form__group.ma-bt-md
+            label.form__label(for='password') 
+              svg.form__icon
+                use(xlink:href='/img/icons.svg#icon-lock')
+              span Password
+            input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+          
+          .form__group
+            button.btn.btn--green.btn--large(type='submit')
+              span Login
+              svg.btn__icon
+                use(xlink:href='/img/icons.svg#icon-arrow-right')
+        
+        .auth-form__footer
+          p Don't have an account? 
+            a.auth-form__link(href='/signup') Sign up here
