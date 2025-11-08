@@ -13,7 +13,6 @@
   <a href="#key-features">Key Features</a> •
   <a href="#demonstration">Demonstration</a> •
   <a href="#update-your-profile">Update your profile</a> •
-  <a href="#api-usage">API Usage</a> •
   <a href="#deployment">Deployment</a> •
   <a href="#build-with">Build With</a> •
   <a href="#to-do">To-do</a> •
@@ -77,15 +76,6 @@ Before using the API, you need to set the variables in Postman depending on your
 
 Check [Natours API Documentation](https://documenter.getpostman.com/view/8689170/SVmzvwpY?version=latest) for more info.
 
-<b> API Features: </b>
-
-Tours List 👉 https://natours-xbsh.onrender.com/api/v1/tours
-
-Tours Statistics 👉 https://natours-xbsh.onrender.com/api/v1/tours/tour-stats
-
-Get Top 5 Cheap Tours 👉 https://natours-xbsh.onrender.com/api/v1/tours/top-5-cheap
-
-Get Tours Within Radius 👉 https://natours-xbsh.onrender.com/api/v1/tours/tours-within/200/center/34.098453,-118.096327/unit/mi
 
 ## Deployment
 
