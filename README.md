@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://natours-8iiv.onrender.com/signup"><img src="public/img/natours_collage_modern.png" alt="Natours" width="200"></a>
+  <a href="https://natours-8iiv.onrender.com/signup"><img src="https://github.com/ritiksharmarj/natours/assets/54701022/326dd79a-8751-4d1d-883f-b302cf0461c5" width="200"></a>
   <br>
   Natours
   <br>
@@ -38,7 +38,7 @@ Live demo (Feel free to visit) 👉 : https://natours-xbsh.onrender.com/
 
 ## Demonstration
 
-[![Natours Walkthrough](https://img.youtube.com/vi/UljiMtXeFx0/maxresdefault.jpg)](https://www.youtube.com/watch?v=UljiMtXeFx0)
+[![Natours Walkthrough](public/img/natours_collage_modern.png)](https://www.youtube.com/watch?v=UljiMtXeFx0)
 
 ## How To Use
 
