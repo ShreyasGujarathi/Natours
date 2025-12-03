@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://natours-8iiv.onrender.com/signup"><img src="public/img/natours_logo (2).png" width="200"></a>
+  <a href="https://natours-xa4e.onrender.com/"><img src="public/img/natours_logo (2).png" width="200"></a>
   <br>
   Natours
   <br>
