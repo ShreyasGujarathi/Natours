@@ -24,7 +24,7 @@
 
 ## Deployed Version
 
-Live demo (Feel free to visit) 👉 : https://natours-xbsh.onrender.com/
+Live demo (Feel free to visit) 👉 : (https://natours-xa4e.onrender.com/)
 
 ## Key Features
 
